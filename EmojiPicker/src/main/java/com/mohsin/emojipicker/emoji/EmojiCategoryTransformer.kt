@@ -39,12 +39,16 @@ class EmojiCategoryTransformer {
                     Build.VERSION_CODES.O, Build.VERSION_CODES.O_MR1 -> transform.addAll(
                         getGlyphEnabledList(list[i]).filter { !EmojiData.missingEmojis26.contains(it) })
 
-                    else ->
-
-                        transform.addAll(getGlyphEnabledList(list[i]))
+                    else -> {
+                        transform.addAll(getGlyphEnabledList(list[i]).filter {
+                            !EmojiData.aliasMissingEmojis.contains(
+                                it
+                            )
+                        })
+                    }
                 }
             } else {
-                transform.addAll(getGlyphEnabledList(list[i]))
+                transform.addAll(getGlyphEnabledList(list[i]).filter { !EmojiData.aliasMissingEmojis.contains(it) })
             }
 
             transformList.add(ArrayList(transform))
