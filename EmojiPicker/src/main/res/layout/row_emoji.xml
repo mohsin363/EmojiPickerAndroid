@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.emoji.widget.EmojiTextView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/etv_emoji"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:paddingBottom="@dimen/dim_8"
+    android:textSize="28sp"
+    android:textColor="@color/emoji_item_color"
+    tools:text="\uD83C\uDF44" />

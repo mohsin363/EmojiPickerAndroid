@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_color">#171a1f</color>
+    <color name="tab_indicator_color">#03A9F4</color>
+    <color name="tab_selected_title_color">#c5cbd2</color>
+    <color name="tab_unselected_color">#96999e</color>
+    <color name="header_color">#37393E</color>
+    <color name="emoji_item_color">#DFC5CBD2</color>
+    <color name="reaction_bottom_sheet_bg">#171a1f</color>
+</resources>
