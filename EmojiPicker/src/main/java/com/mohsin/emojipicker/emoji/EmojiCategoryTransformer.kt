@@ -41,14 +41,14 @@ class EmojiCategoryTransformer {
 
                     else -> {
                         transform.addAll(getGlyphEnabledList(list[i]).filter {
-                            !EmojiData.aliasMissingEmojis.contains(
+                            !EmojiData.EmojisWithoutAliases.contains(
                                 it
                             )
                         })
                     }
                 }
             } else {
-                transform.addAll(getGlyphEnabledList(list[i]).filter { !EmojiData.aliasMissingEmojis.contains(it) })
+                transform.addAll(getGlyphEnabledList(list[i]).filter { !EmojiData.EmojisWithoutAliases.contains(it) })
             }
 
             transformList.add(ArrayList(transform))
