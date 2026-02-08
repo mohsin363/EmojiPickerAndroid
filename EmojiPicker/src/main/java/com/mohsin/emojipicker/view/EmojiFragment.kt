@@ -19,13 +19,11 @@ class EmojiFragment : Fragment() {
     companion object {
         private const val EMOJI_LIST = "EMOJI_LIST"
         fun getNewInstance(
-            //userList: ArrayList<EmojiItemView>,
             userList: ArrayList<String>,
             emojiListener: EmojiPickerDialog.EmojiClickListener
         ) = EmojiFragment().apply {
             listener = emojiListener
             val bundle = Bundle()
-            //bundle.putParcelableArrayList(EMOJI_LIST, userList)
             bundle.putStringArrayList(EMOJI_LIST, userList)
             arguments = bundle
         }
@@ -35,20 +33,16 @@ class EmojiFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentEmojiBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val emojiItemViewList = arguments?.getParcelableArrayList<EmojiItemView>(EMOJI_LIST)
         val emojiList = arguments?.getStringArrayList(EMOJI_LIST)
 
         val context = context
-        //if (emojiItemViewList != null && context != null) {
         if (emojiList != null && context != null) {
-            //adapter = EmojiSheetTitlesAdapter(userList)
             attachLayoutManager()
             binding.recyclerViewEmojis.adapter = EmojiRecyclerViewAdapter(emojiList).apply {
                 emojiClickedListener = { item, _ ->

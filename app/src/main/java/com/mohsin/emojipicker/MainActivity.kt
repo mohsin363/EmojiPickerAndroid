@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.button.setOnClickListener {
             showEmojiDialog()
         }
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
             binding.emojiValue.text = unicode
             emojiPickerDialog?.dismiss()
         }
-
     }
 
     private fun showEmojiDialog() {

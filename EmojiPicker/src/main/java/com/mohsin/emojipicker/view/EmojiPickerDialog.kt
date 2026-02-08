@@ -1,29 +1,34 @@
 package com.mohsin.emojipicker.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.IdRes
-import androidx.annotation.NonNull
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mohsin.emojipicker.R
 import com.mohsin.emojipicker.databinding.ViewEmojiBottomSheetBinding
 import com.mohsin.emojipicker.emoji.EmojiCategoryTransformer
-import com.mohsin.emojipicker.emoji.categories.*
+import com.mohsin.emojipicker.emoji.categories.ActivitiesCategory
+import com.mohsin.emojipicker.emoji.categories.AnimalsNatureCategory
+import com.mohsin.emojipicker.emoji.categories.Category
+import com.mohsin.emojipicker.emoji.categories.FlagsCategory
+import com.mohsin.emojipicker.emoji.categories.FoodDrinkCategory
+import com.mohsin.emojipicker.emoji.categories.ObjectsCategory
+import com.mohsin.emojipicker.emoji.categories.SmileysPeopleCategory
+import com.mohsin.emojipicker.emoji.categories.SymbolsCategory
+import com.mohsin.emojipicker.emoji.categories.TravelPlacesCategory
 import com.mohsin.emojipicker.emoji.categoryUnicodes.EmojiData
 import com.mohsin.emojipicker.view.recyclerview.BottomSheetPagesAdapter
 import com.mohsin.emojipicker.view.recyclerview.EmojiItemView
 
 class EmojiPickerDialog(
-    @NonNull private val frgManager: FragmentManager,
-    @NonNull private val emojiListener: EmojiClickListener,
-    @SuppressLint("ResourceType") @IdRes private val theme: Int = R.style.BottomSheetDialogTheme
-): BottomSheetDialogFragment() {
-
+    private val frgManager: FragmentManager,
+    private val emojiListener: EmojiClickListener,
+    private val theme: Int = R.style.BottomSheetDialogTheme
+) : BottomSheetDialogFragment() {
 
     interface EmojiClickListener {
         fun onEmojiClicked(unicode: String)
@@ -45,7 +50,6 @@ class EmojiPickerDialog(
                 emojiCategoriesTransformedList.add(emojisList)
             }
         }
-
 
         private fun initializeEmojiCategoryList(): List<Category> {
             return listOf(
@@ -70,7 +74,6 @@ class EmojiPickerDialog(
         return binding.root
     }
 
-    @SuppressLint("ResourceType")
     override fun getTheme(): Int {
         return theme
     }
@@ -81,44 +84,29 @@ class EmojiPickerDialog(
         setUpUI()
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     private fun setUpUI() {
 
         val emojiCategoriesTitles = initializeEmojiCategoriesTitles()
         val adapter = BottomSheetPagesAdapter(this)
-//
-//        for (emojisList in emojiCategoriesTransformedList) {
-//            val fragment =
-//                EmojiFragment.getNewInstance(
-//                    ArrayList(emojisList),
-//                    emojiListener
-//                )
-//
-//            adapter.addFragment(fragment)
-//        }
-
 
         val transformData = EmojiCategoryTransformer().transform(EmojiData.data)
         for (emojisList in transformData) {
-            val fragment =
-                EmojiFragment.getNewInstance(
-                    emojisList,
-                    emojiListener
-                )
+            val fragment = EmojiFragment.getNewInstance(
+                emojisList,
+                emojiListener
+            )
 
             adapter.addFragment(fragment)
         }
 
         binding.emojiViewpager.adapter = adapter
 
-
         TabLayoutMediator(
             binding.emojiTitlesTab,
             binding.emojiViewpager
         ) { tab, position ->
-            tab.icon = resources.getDrawable(
-                emojiCategoriesTitles[position].second,
-                requireContext().theme
+            tab.icon = ContextCompat.getDrawable(
+                requireContext(), emojiCategoriesTitles[position].second
             )
         }.attach()
     }
@@ -130,7 +118,10 @@ class EmojiPickerDialog(
     private fun initializeEmojiCategoriesTitles(): List<Pair<String, Int>> {
         return listOf(
             Pair(getString(R.string.smileysAndPeopleTitle), R.drawable.emoji_ios_category_people),
-            Pair(getString(R.string.activitiesCategoryTitle), R.drawable.emoji_ios_category_activity),
+            Pair(
+                getString(R.string.activitiesCategoryTitle),
+                R.drawable.emoji_ios_category_activity
+            ),
             Pair(getString(R.string.animalsAndNatureTitle), R.drawable.emoji_ios_category_nature),
             Pair(getString(R.string.foodAndDrinkTitle), R.drawable.emoji_ios_category_food),
             Pair(getString(R.string.objectsTitle), R.drawable.emoji_ios_category_objects),

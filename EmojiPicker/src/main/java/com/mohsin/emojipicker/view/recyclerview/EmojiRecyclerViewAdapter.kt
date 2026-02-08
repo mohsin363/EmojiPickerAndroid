@@ -12,7 +12,7 @@ class EmojiRecyclerViewAdapter(
 ) : RecyclerView.Adapter<EmojiRecyclerViewAdapter.EmojiListHolder>() {
 
     class EmojiListHolder(inflatedView: View) : RecyclerView.ViewHolder(inflatedView) {
-        val emojiTextView: EmojiTextView? by bind(R.id.etv_emoji )
+        val emojiTextView: EmojiTextView? by bind(R.id.etv_emoji)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmojiListHolder {

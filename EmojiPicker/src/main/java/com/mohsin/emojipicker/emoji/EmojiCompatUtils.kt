@@ -11,10 +11,12 @@ object EmojiCompatUtils {
     private var emojiCompat: EmojiCompat? = null
 
     fun initialize(context: Context, emojiListener: EmojiInitListener) {
-        emojiCompat = EmojiCompat.init(FontRequestEmojiCompatConfig(context, createFontRequest()).apply {
-            setReplaceAll(true)
-            registerInitCallback(InitCallback(emojiListener))
-        })
+        emojiCompat = EmojiCompat.init(
+            FontRequestEmojiCompatConfig(context, createFontRequest()).apply {
+                setReplaceAll(true)
+                registerInitCallback(InitCallback(emojiListener))
+            }
+        )
     }
 
     private fun createFontRequest(): FontRequest = FontRequest(
@@ -28,7 +30,8 @@ object EmojiCompatUtils {
         return emojiCompat?.hasEmojiGlyph(unicodeString) ?: false
     }
 
-    private class InitCallback internal constructor(private val listener: EmojiInitListener) : EmojiCompat.InitCallback() {
+    private class InitCallback(private val listener: EmojiInitListener) :
+        EmojiCompat.InitCallback() {
 
         override fun onInitialized() {
             listener.onEmojisInitialized(true)

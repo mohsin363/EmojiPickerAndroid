@@ -7,10 +7,11 @@ import com.mohsin.emojipicker.view.recyclerview.EmojiItemView
 
 class EmojiCategoryTransformer {
 
-    fun transform(category: Category): List<EmojiItemView> = transformCategoryToEmojiItems(category).filter {
-        //EmojiCompatUtils.hasEmojiGlyph(it.unicode)
-        true
-    }
+    fun transform(category: Category): List<EmojiItemView> =
+        transformCategoryToEmojiItems(category).filter {
+            //EmojiCompatUtils.hasEmojiGlyph(it.unicode)
+            true
+        }
 
     fun transform(list: Array<ArrayList<String>>): List<ArrayList<String>> {
         val transformList = mutableListOf<ArrayList<String>>()
@@ -48,7 +49,11 @@ class EmojiCategoryTransformer {
                     }
                 }
             } else {
-                transform.addAll(getGlyphEnabledList(list[i]).filter { !EmojiData.EmojisWithoutAliases.contains(it) })
+                transform.addAll(getGlyphEnabledList(list[i]).filter {
+                    !EmojiData.EmojisWithoutAliases.contains(
+                        it
+                    )
+                })
             }
 
             transformList.add(ArrayList(transform))
